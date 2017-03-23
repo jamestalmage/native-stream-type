@@ -19,7 +19,10 @@
     "index.js"
   ],
   "keywords": [
-    ""
+    "child_process",
+    "spawn",
+    "stream",
+    "streams"
   ],
   "dependencies": {},
   "devDependencies": {
