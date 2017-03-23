@@ -28,7 +28,8 @@ nativeStreamType(process.stdin);
 
 ### nativeStreamType(obj)
 
-Returns a `string` (`pipe` | `tty` | `tcp` | `udp`) if `obj` is one of the native backed stream implementations. 
+Returns a `string` (`pipe` | `tty` | `tcp` | `udp`) if `obj` is one of the native backed stream implementations.
+ 
 Returns `false` if `obj` is not one of the above native streams.
 
 Note that `udp` sockets don't necessarily implement a stream interface (see "Notes" section below).
@@ -42,9 +43,9 @@ An object that might be a native stream implementation.
 
 ## Notes
 
-This uses the undocumented `process.binding(...)`. At present, the Node team is avoiding deprecation, as it is very widely used despite being undocumented.
+This uses the undocumented `process.binding(...)`. At present, the Node team is avoiding deprecation, so it should be safe to use.
 
-You are allowed to pass UDP sockets to the `stdio` option, but they don't seam to implement the stream interface. If you want to guarantee the object is also a stream, you should use this in combination with [`is-stream`](https://github.com/sindresorhus/is-stream). I have yet to find a good example of udp sockets being passed to `spawn`. It works without throwing an error, but I can't get the socket to transfer any data to the child process.
+You are allowed to pass UDP sockets as a `stdio` option, even though they do not implement the stream interface. Thus, getting a truthy return value does not guarantee a stream. Passing a UDP socket will spawn without throwing an error, but I have yet to figure out how to actually transfer any data to the child process when using one. You may want to guard against non streams using [`is-stream`](https://github.com/sindresorhus/is-stream).
 
 Implementation derived from Node internals [here](https://github.com/nodejs/node/blob/98e54b0bd4854bdb3e2949d1b6b20d6777fb7cde/lib/internal/child_process.js#L14-L18), [here](https://github.com/nodejs/node/blob/98e54b0bd4854bdb3e2949d1b6b20d6777fb7cde/lib/internal/child_process.js#L254-L261), and [here](https://github.com/nodejs/node/blob/98e54b0bd4854bdb3e2949d1b6b20d6777fb7cde/lib/internal/child_process.js#L846-L856).
 
