@@ -1,0 +1,29 @@
+{
+  "name": "native-stream-type",
+  "version": "0.0.0",
+  "description": "Find the native stream type",
+  "license": "MIT",
+  "repository": "jamestalmage/native-stream-type",
+  "author": {
+    "name": "James Talmage",
+    "email": "james@talmage.io",
+    "url": "github.com/jamestalmage"
+  },
+  "engines": {
+    "node": ">=4"
+  },
+  "scripts": {
+    "test": "xo && node ./test.js && echo foobar | node ./test-pipe.js"
+  },
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    ""
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "is-stream": "^1.1.0",
+    "xo": "^0.17.0"
+  }
+}
