@@ -1,6 +1,6 @@
 {
   "name": "native-stream-type",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Find the native stream type",
   "license": "MIT",
   "repository": "jamestalmage/native-stream-type",
