@@ -1,16 +1,17 @@
+const PassThrough = require('stream').PassThrough;
 const assert = require('assert');
 const dgram = require('dgram');
 const net = require('net');
 const isStream = require('is-stream');
 const fn = require('.');
 
-const test = (name, obj, expected) => {
+const test = (name, obj, expected, checkStream) => {
 	const type = fn(obj);
-	assert(type === expected, `${name} should be a ${expected}, got ${type}`);
-	if (expected !== 'udp') {
-		assert(isStream(obj), `${name} should be a stream`);
+	assert(type === expected, `${name} should be ${expected}, got ${type}`);
+	if (expected !== 'udp' && checkStream !== false) {
+		assert(isStream(obj), `${name} should be stream`);
 	}
-	console.log(`${name} is a ${type}`);
+	console.log(`${name} is ${type}`);
 };
 
 // STDIO
@@ -36,3 +37,15 @@ test('tcpClient', tcpClient, 'tcp');
 // UDP SOCKET
 const udpSocket = dgram.createSocket('udp4');
 test('udpSocket', udpSocket, 'udp');
+
+// PassThrough
+test('PassThrough', new PassThrough(), false);
+
+// Number
+test('Number', 2, false, false);
+
+// null
+test('null', null, false, false);
+
+// undefined
+test('undefined', undefined, false, false);

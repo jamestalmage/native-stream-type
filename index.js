@@ -26,6 +26,10 @@ function getHandleType(stream) {
 }
 
 function getHandle(stream) {
+	if (!stream) {
+		return false;
+	}
+
 	if (getHandleType(stream)) {
 		return stream;
 	}
